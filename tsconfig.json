@@ -5,17 +5,20 @@
       "@/src/*": [
         "./*"
       ],
-      "@/app/*": [
-        "./app/*"
-      ],
-      "@/controllers/*": [
-        "./app/controllers/*"
-      ],
       "@/settings/*": [
         "./settings/*"
       ],
       "@/constants/*": [
         "./constants/*"
+      ],
+      "@/interfaces/*": [
+        "./interfaces/*"
+      ],
+      "@/app/*": [
+        "./app/*"
+      ],
+      "@/controllers/*": [
+        "./app/controllers/*"
       ],
       "@/helpers/*": [
         "./app/helpers/*"
@@ -26,9 +29,9 @@
       "@/abstracts/*": [
         "./app/abstracts/*"
       ],
-      "@/interfaces/*": [
-        "./interfaces/*"
-      ],
+      "@/services/*": [
+        "./app/services/*"
+      ]
     },
   },
   "target": "es5",

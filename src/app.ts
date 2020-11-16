@@ -1,8 +1,11 @@
 import './loaders'
 import * as express from 'express'
-const app = express()
 
+class App {
+    public _app: express.Application
 
-app.use(express.json())
-
-app.listen(3000)
+    constructor() {
+        this._app.use(express.json())
+        this._app.use()
+    }
+}
