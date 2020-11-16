@@ -8,6 +8,7 @@ export const AliasSettings = {
     '@/loaders': resolve(PROJECT_PATH, 'loaders'),
     '@/app': resolve(PROJECT_PATH, 'app'),
     '@/controllers': resolve(PROJECT_PATH, 'app', 'controllers'),
+    '@/routers': resolve(PROJECT_PATH, 'app', 'routers'),
     '@/helpers': resolve(PROJECT_PATH, 'app', 'helpers'),
     '@/errors': resolve(PROJECT_PATH, 'app', 'errors'),
     '@/abstracts': resolve(PROJECT_PATH, 'app', 'abstracts')

@@ -23,6 +23,9 @@
       "@/helpers/*": [
         "./app/helpers/*"
       ],
+      "@/routers/*": [
+        "./app/routers/*"
+      ],
       "@/errors/*": [
         "./app/errors/*"
       ],

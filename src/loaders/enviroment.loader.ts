@@ -6,4 +6,3 @@ import { ENVIROMENT_PATH } from '@/constants/global.constants'
 const enviroment = process.env.ENV as 'DEVELOPMENT' | 'PRODUCTION' || 'DEVELOPMENT'
 const enviromentFile = Enviroments[enviroment]
 dotenv.config({ path: resolve(ENVIROMENT_PATH, enviromentFile) })
-
