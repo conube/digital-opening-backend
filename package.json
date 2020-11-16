@@ -10,9 +10,6 @@
     "start": "yarn build && node ./build/server.js",
     "build": "yarn rimraf ./build && tsc"
   },
-  "_moduleAliases": {
-    "@src": "./src"
-  },
   "devDependencies": {
     "@types/node": "^14.14.7",
     "@typescript-eslint/eslint-plugin": "^4.7.0",

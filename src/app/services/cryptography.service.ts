@@ -37,8 +37,7 @@ export class CryptographyService {
         return encrypted
     }
 
-    // @Todo find a way to show enabled strategies based on attribute `_strategies` 
-    public async useStrategy(strategy: string): Promise<void> {
+    public async useStrategy(strategy: keyof ICryptographyStrategies): Promise<void> {
         if (!this._strategies[strategy]) {
             // @Todo create an error to throw when a strategy does not exists 
             throw new Error('Requested strategy does not exist')
