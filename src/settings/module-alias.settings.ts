@@ -3,9 +3,12 @@ import { PROJECT_PATH } from '../constants/global.constants'
 
 export const AliasSettings = {
     '@/src': resolve(PROJECT_PATH),
-    '@/controllers': resolve(PROJECT_PATH, 'controllers'),
     '@/settings': resolve(PROJECT_PATH, 'settings'),
-    '@/loaders': resolve(PROJECT_PATH, 'loaders'),
     '@/constants': resolve(PROJECT_PATH, 'constants'),
-    '@/helpers': resolve(PROJECT_PATH, 'helpers'),
+    '@/loaders': resolve(PROJECT_PATH, 'loaders'),
+    '@/app': resolve(PROJECT_PATH, 'app'),
+    '@/controllers': resolve(PROJECT_PATH, 'app', 'controllers'),
+    '@/helpers': resolve(PROJECT_PATH, 'app', 'helpers'),
+    '@/errors': resolve(PROJECT_PATH, 'app', 'errors'),
+    '@/abstracts': resolve(PROJECT_PATH, 'app', 'abstracts')
 }

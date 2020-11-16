@@ -1,5 +1,8 @@
 import './loaders'
+import * as express from 'express'
+const app = express()
 
-export class App {
 
-}
+app.use(express.json())
+
+app.listen(3000)

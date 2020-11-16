@@ -1,2 +1,2 @@
-export * from './env.loader'
-export * from './module-alias.loader'
+import './module-alias.loader'
+import './enviroment.loader'

@@ -1,4 +1,4 @@
-export const EnviromentSettings = {
+export const Enviroments = {
     DEVELOPMENT: '.env.development',
     PRODUCTION: '.env.production'
 }
