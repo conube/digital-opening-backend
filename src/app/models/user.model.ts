@@ -9,9 +9,9 @@ export interface IUser {
     // photo: Media -> Implement Media Document
 }
 
-export interface IUserSchema extends IUser, Document { }
+interface IUserSchema extends IUser, Document { }
 
-export const UserSchema: Schema = new Schema({
+const UserSchema: Schema = new Schema({
     name: {
         type: String,
         required: true,

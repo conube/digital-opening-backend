@@ -9,7 +9,6 @@ class Server {
 
     // @Todo create an IServerSettings
     constructor(app: Application, settings: { host: string, port: string }) {
-        console.log(settings)
         this._app = app
         this._port = settings.port
         this._host = settings.host

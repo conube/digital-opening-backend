@@ -8,6 +8,8 @@ export const Aliases = {
     '@/loaders': resolve(PROJECT_PATH, 'loaders'),
     '@/app': resolve(PROJECT_PATH, 'app'),
     '@/controllers': resolve(PROJECT_PATH, 'app', 'controllers'),
+    '@/adapters': resolve(PROJECT_PATH, 'app', 'adapters'),
+    '@/services': resolve(PROJECT_PATH, 'app', 'services'),
     '@/routers': resolve(PROJECT_PATH, 'app', 'routers'),
     '@/helpers': resolve(PROJECT_PATH, 'app', 'helpers'),
     '@/errors': resolve(PROJECT_PATH, 'app', 'errors'),

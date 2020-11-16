@@ -20,6 +20,9 @@
       "@/controllers/*": [
         "./app/controllers/*"
       ],
+      "@/adapters/*": [
+        "./app/adapters/*"
+      ],
       "@/helpers/*": [
         "./app/helpers/*"
       ],
