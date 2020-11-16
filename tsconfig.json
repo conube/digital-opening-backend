@@ -34,6 +34,9 @@
       "@/errors/*": [
         "./app/errors/*"
       ],
+      "@/models/*": [
+        "./app/models/*"
+      ],
       "@/abstracts/*": [
         "./app/abstracts/*"
       ],

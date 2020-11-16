@@ -7,10 +7,11 @@
   "private": true,
   "scripts": {
     "start:dev": "yarn nodemon",
-    "start": "yarn build && node ./build/server.js",
-    "build": "yarn rimraf ./build && tsc"
+    "start": "yarn build && node ./dist/server.js",
+    "build": "yarn rimraf ./dist && tsc"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.14.7",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
@@ -37,6 +38,7 @@
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.14"
   }
 }
