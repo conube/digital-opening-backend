@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
+    "rootDir": ".",
+    "outDir": "build",
     "paths": {
       "@/src/*": [
         "./*"
@@ -45,9 +47,10 @@
   "lib": [
     "es6"
   ],
+  "include": [
+    "src/**/*.*"
+  ],
   "allowJs": true,
-  "outDir": "build",
-  "rootDir": "src",
   "strict": true,
   "noImplicitAny": true,
   "esModuleInterop": true,
