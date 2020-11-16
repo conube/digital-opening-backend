@@ -15,20 +15,12 @@ export interface ICryptographyStrategy {
 
 export interface ICryptographyStrategies {
     BCRYPT: ICryptographyStrategy,
-    DEFAULT?: ICryptographyStrategy,
-    back?: Boolean
+    DEFAULT?: ICryptographyStrategy
 }
 
 export class BcryptStrategy implements ICryptographyStrategy {
     public async encrypt(str: string): Promise<string> {
         const encrypted = hash(str, 10)
-        return encrypted
-    }
-}
-
-export class RandomStrategy implements ICryptographyStrategy {
-    public async encrypt(str: string): Promise<string> {
-        const encrypted = 'abobrinha'
         return encrypted
     }
 }
@@ -62,10 +54,9 @@ export class CryptographyService {
     }
 }
 
-const bcryptStrategy = new BcryptStrategy
 export const cryptographyService = new CryptographyService(
     {
-        BCRYPT: bcryptStrategy,
-        DEFAULT: new RandomStrategy
+        BCRYPT: new BcryptStrategy,
+        DEFAULT: new BcryptStrategy
     }
 )
