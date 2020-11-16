@@ -1,16 +1,13 @@
 import { Router } from 'express'
 import { userController } from '@/controllers/user.controller'
-import { expressHandlerAdapter } from '@/adapters/express-controller.adapter'
-
+import { adapt } from '@/src/app/adapters/express-handler.adapter'
 
 export class UserRouter {
-    public readonly _router: Router
+    public readonly _router: Router = Router()
 
     constructor() {
-        this._router = Router()
-        this._router.get('/users', expressHandlerAdapter.adapt(userController.list))
-        this._router.post('/users', expressHandlerAdapter.adapt(userController.create))
-        // @Todo implement other routes
+        this._router.get('/users', adapt(userController.list.bind(userController)))
+        this._router.post('/users', adapt(userController.create.bind(userController)))
         this._router.get('/users/:user_id', () => { })
         this._router.put('/users/:user_id', () => { })
         this._router.delete('/users/:user_id', () => { })

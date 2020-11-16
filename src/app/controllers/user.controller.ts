@@ -1,8 +1,12 @@
 import { IController, IHttpRequest, IHttpResponse } from '@/interfaces/http.interface'
-import { userService } from '@/services/user.service'
 import { IUser } from '../models/user.model'
+import { userService, UserService } from '@/services/user.service'
 
 export class UserController implements IController {
+    constructor(
+        private userService: UserService
+    ) { }
+
     public async list(httpRequest: IHttpRequest): Promise<IHttpResponse> {
         const users = await userService.list()
         return {
@@ -14,7 +18,7 @@ export class UserController implements IController {
 
     public async create(httpRequest: IHttpRequest): Promise<IHttpResponse> {
         const userDTO: IUser = httpRequest.body
-        const user = await userService.create(userDTO)
+        const user = await this.userService.create(userDTO)
         return {
             message: 'User created successfully',
             statusCode: 200,
@@ -23,4 +27,4 @@ export class UserController implements IController {
     }
 }
 
-export const userController = new UserController()
+export const userController = new UserController(userService)

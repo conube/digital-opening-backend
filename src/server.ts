@@ -2,13 +2,17 @@ import { app } from './app'
 import { Application } from 'express'
 import { HTTP_HOST, HTTP_PORT } from '@/settings/global.settings'
 
+interface IServerSettings {
+    host: string,
+    port: string
+}
+
 class Server {
     private _port: string
     private _host: string
     private _app: Application
 
-    // @Todo create an IServerSettings
-    constructor(app: Application, settings: { host: string, port: string }) {
+    constructor(app: Application, settings: IServerSettings) {
         this._app = app
         this._port = settings.port
         this._host = settings.host

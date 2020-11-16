@@ -1,20 +1,19 @@
-import { IUser } from "../models/user.model";
+import { UserModel, IUser } from "../models/user.model";
 
 export class UserService {
-    private _users: IUser[] = []
-
-    constructor() { }
-
-    public async create(userDTO: IUser): Promise<IUser> {
-        this._users.push(userDTO)
-        const user = await Promise.resolve(userDTO)
-        return user
-    }
+    constructor(
+        private userModel: typeof UserModel // Thats not good.. Maybe a Repository pattern
+    ) { }
 
     public async list(): Promise<IUser[]> {
-        const users = Promise.resolve(this._users)
+        const users = await this.userModel.find()
         return users
+    }
+
+    public async create(userDTO: IUser): Promise<IUser> {
+        const user = await this.userModel.create(userDTO)
+        return user
     }
 }
 
-export const userService = new UserService()
+export const userService = new UserService(UserModel)

@@ -1,1 +1,1 @@
-export const DATABASE_URL = process.env.DATABASE_URL as string
+export const MONGO_DB_URI = process.env.MONGO_DB_URI as string
