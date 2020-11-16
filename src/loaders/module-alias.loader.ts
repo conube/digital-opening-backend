@@ -1,5 +1,5 @@
 import * as moduleAlias from 'module-alias'
-import { AliasSettings } from '../settings/module-alias.settings'
+import { Aliases } from '../settings/module-alias.settings'
 
-moduleAlias.addAliases(AliasSettings)
+moduleAlias.addAliases(Aliases)
 

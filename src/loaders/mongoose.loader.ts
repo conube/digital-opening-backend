@@ -1,5 +1,5 @@
 import { Mongoose, connect, connection } from 'mongoose'
-import { DatabaseSettings } from '@/settings/database.settings'
+import { DATABASE_URL } from '@/settings/database.settings'
 import { ILoader } from '../interfaces/loader.interface'
 
 export class MongooseLoader implements ILoader {
@@ -8,7 +8,7 @@ export class MongooseLoader implements ILoader {
     public async load(): Promise<void> {
         if (!this._connection) {
             try {
-                this._connection = await connect(DatabaseSettings.DATABASE_URL, { useNewUrlParser: true })
+                this._connection = await connect(DATABASE_URL, { useNewUrlParser: true })
             } catch {
                 throw new Error('Error trying to connect with mongodb')
             }

@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { PROJECT_PATH } from '../constants/global.constants'
 
-export const AliasSettings = {
+export const Aliases = {
     '@/src': resolve(PROJECT_PATH),
     '@/settings': resolve(PROJECT_PATH, 'settings'),
     '@/constants': resolve(PROJECT_PATH, 'constants'),
