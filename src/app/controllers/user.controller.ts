@@ -25,6 +25,24 @@ export class UserController implements IController {
       content: user
     }
   }
+  
+  public async read(httpRequest: IHttpRequest): Promise<IHttpResponse> {
+    const userId = httpRequest.params.user_id
+    try {
+      const user = await userService.findById(userId)
+      return {
+        message: 'User found successfully',
+        statusCode: 200,
+        content: user
+      }
+    } catch (error) {
+        return {
+          message: 'User not found',
+          statusCode: 400,
+          content: {}
+        }
+    }
+  }
 }
 
 export const userController = new UserController(userService)

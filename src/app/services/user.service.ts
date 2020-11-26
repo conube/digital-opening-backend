@@ -24,6 +24,16 @@ export class UserService {
 
     return user
   }
+
+  public async findById(_id: string): Promise<IUserSchema> {
+    const user = await this.userModel.findById({ _id })
+
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    return user
+  }
 }
 
 export const userService = new UserService(UserModel)
