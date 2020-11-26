@@ -43,6 +43,25 @@ export class UserController implements IController {
         }
     }
   }
+
+  public async update(httpRequest: IHttpRequest): Promise<IHttpResponse> {
+    const userId = httpRequest.params.user_id
+    const userInfo = httpRequest.body
+    try {
+      const user = await userService.updateById(userId, userInfo)
+      return {
+        message: 'User updated successfully',
+        statusCode: 200,
+        content: user
+      }
+    } catch (error) {
+        return {
+          message: 'User not found',
+          statusCode: 400,
+          content: {}
+        }
+    }
+  }
 }
 
 export const userController = new UserController(userService)
