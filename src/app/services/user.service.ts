@@ -34,14 +34,26 @@ export class UserService {
 
     return user
   }
+  
   public async updateById(_id: string, userDTO: IUser): Promise<IUserSchema> {
     await this.userModel
     .updateOne(
       { _id }, 
       userDTO
-    )
+      )
+      
+      const user = this.findById(_id)
+      
+      if (!user) {
+        throw new Error('User not found')
+      }
+      
+      return user
+    }
 
-    const user = this.findById(_id)
+  public async deleteById(_id: string): Promise<IUserSchema> {
+
+    const user = await this.userModel.findOneAndDelete({ _id })
 
     if (!user) {
       throw new Error('User not found')

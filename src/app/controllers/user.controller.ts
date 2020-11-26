@@ -62,6 +62,25 @@ export class UserController implements IController {
         }
     }
   }
+
+  public async delete(httpRequest: IHttpRequest): Promise<IHttpResponse> {
+    const userId = httpRequest.params.user_id
+    try {
+      await userService.deleteById(userId)
+
+      return {
+        message: 'User deleted successfully',
+        statusCode: 200,
+        content: {}
+      }
+    } catch (error) {
+      return {
+        message: 'User not found',
+        statusCode: 400,
+        content: {}
+      }
+    }
+  }
 }
 
 export const userController = new UserController(userService)
