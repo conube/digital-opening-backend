@@ -1,5 +1,5 @@
 import { Document, Schema, model } from 'mongoose'
-import { cryptographyService } from '@/services/cryptography.service'
+import { encryptingService } from '@/services/encrypting.service'
 
 export interface IUser {
   name: String
@@ -36,7 +36,7 @@ UserSchema.pre<IUserSchema>('save', async function (next) {
     return next()
   }
 
-  this.password = await cryptographyService.encrypt(this.password as string)
+  this.password = await encryptingService.encrypt(this.password as encrypting.service)
 })
 
 export const UserModel = model<IUserSchema>('User', UserSchema)
