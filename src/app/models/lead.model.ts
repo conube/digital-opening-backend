@@ -1,5 +1,4 @@
 import { Document, Schema, model, Types } from 'mongoose'
-import { encryptingService } from '@/services/encrypting.service'
 
 export interface ILead {
 	user_id: String
@@ -15,6 +14,7 @@ export interface ILeadSchema extends ILead, Document { }
 const PersonalSchema: Schema = new Schema({
 	cpf: String
 })
+
 const DocumentSchema: Schema = new Schema({
 	register: String,
 	cpf: String,
@@ -40,7 +40,6 @@ const CompanySchema: Schema = new Schema({
 	nature: String,
 	address: AddressSchema
 })
-
 
 const LeadSchema: Schema = new Schema({
 	user_id: {
