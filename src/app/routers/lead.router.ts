@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { leadController } from './../controllers/lead.controllers';
+import { leadController } from '../controllers/lead.controller';
 import { adapt } from '@/src/app/adapters/express-handler.adapter'
 
 export class LeadRouter {
