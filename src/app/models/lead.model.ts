@@ -2,7 +2,6 @@ import { Document, Schema, model, Types } from 'mongoose'
 
 export interface ILead {
 	user_id: String
-	company_id: String
 	stage: []
 	type: []
 	personal: {}
@@ -18,12 +17,11 @@ const PersonalSchema: Schema = new Schema({
 const DocumentSchema: Schema = new Schema({
 	register: String,
 	cpf: String,
-	media_front: Buffer,
-	media_back: Buffer
+	media_front: String,
+	media_back: String
 })
 
 const AddressSchema: Schema = new Schema({
-	id: Types.ObjectId,
 	street: String,
 	neighbourhood: String,
 	number: String,
@@ -32,7 +30,6 @@ const AddressSchema: Schema = new Schema({
 })
 
 const CompanySchema: Schema = new Schema({
-	id: String,
 	cnpj: String,
 	name: String ,
 	company_name: String,
@@ -46,19 +43,15 @@ const LeadSchema: Schema = new Schema({
 		type: Types.ObjectId,
 		required: true
 	},
-	company_id: {
-		type: Types.ObjectId,
-		required: true
-	},
 	stage: {
 		type: [String],
 		required: false
 	},
 	type: {
-		type: [String],
+		type: String,
 		enum: ['LAWYER', 'ACCOUNTANT'],
 		required: true,
-		max: 2
+		
 	},
 	personal: {
 		type: PersonalSchema

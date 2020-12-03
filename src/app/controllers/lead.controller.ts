@@ -18,11 +18,19 @@ export class LeadController implements IController {
 
 	public async create(httpRequest: IHttpRequest): Promise<IHttpResponse> {
 		const leadDTO: ILead = httpRequest.body
-		const lead = await this.leadService.create(leadDTO)
-		return {
-			message: 'Lead created successfully',
-			statusCode: 200,
-			content: lead
+		try{
+			const lead = await this.leadService.create(leadDTO)
+			return {
+				message: 'Lead created successfully',
+				statusCode: 200,
+				content: lead
+			}
+		} catch(err) {
+			return {
+				message: `${err}`,
+				statusCode: 500,
+				content: {}
+			}
 		}
 	}
 
@@ -47,6 +55,7 @@ export class LeadController implements IController {
 	public async update(httpRequest: IHttpRequest): Promise<IHttpResponse> {
 		const leadId = httpRequest.params.lead_id
 		const leadInfo = httpRequest.body
+
 		try {
 			const lead = await leadService.updateById(leadId, leadInfo)
 			return {
