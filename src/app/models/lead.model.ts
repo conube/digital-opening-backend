@@ -17,8 +17,8 @@ const PersonalSchema: Schema = new Schema({
 const DocumentSchema: Schema = new Schema({
 	register: String,
 	cpf: String,
-	media_front: String,
-	media_back: String
+	media_front: Buffer,
+	media_back: Buffer
 })
 
 const AddressSchema: Schema = new Schema({
