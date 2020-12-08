@@ -9,6 +9,7 @@ export interface IUser {
   findByEmail: (email: string) => Promise<IUser>
   // password_confirmation: String -> Implement validation with schema validators
   // photo: Media -> Implement Media Document
+  //
 }
 
 export interface IUserSchema extends IUser, Document { }
