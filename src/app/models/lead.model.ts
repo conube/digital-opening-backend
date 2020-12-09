@@ -10,9 +10,6 @@ export interface ILead {
 }
 
 export interface ILeadSchema extends ILead, Document { }
-const PersonalSchema: Schema = new Schema({
-	cpf: String
-})
 
 const Media: Schema = new Schema({
 	original_name: String,

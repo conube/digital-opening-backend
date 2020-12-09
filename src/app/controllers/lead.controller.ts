@@ -26,6 +26,7 @@ export class LeadController implements IController {
 		lead['document']['media_back'].path = mediaBack.original_name + lead['document']['media_back']._id
 		return lead
 	}
+
 	public async create(httpRequest: IHttpRequest): Promise<IHttpResponse> {
 		const leadDTO: ILead = httpRequest.body
 		try{
