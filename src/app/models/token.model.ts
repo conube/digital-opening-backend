@@ -2,13 +2,8 @@ import { Document, Schema, model } from 'mongoose'
 import { encryptingService } from '@/services/encrypting.service'
 
 export interface IToken {
-  name: String
-  email: String
+  email: String,
   password: String,
-  password_confirmation?: String
-  findByEmail: (email: string) => Promise<IToken>
-  // password_confirmation: String -> Implement validation with schema validators
-  // photo: Media -> Implement Media Document
 }
 
 export interface ITokenSchema extends IToken, Document { }
