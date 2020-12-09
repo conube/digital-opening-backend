@@ -1,17 +1,14 @@
 import { Document, Schema, model } from 'mongoose'
 import { encryptingService } from '@/services/encrypting.service'
 
-export interface IUser {
-  name: String
-  email: String
+export interface IToken {
+  email: String,
   password: String,
-  password_confirmation?: String
-  findByEmail: (email: string) => Promise<IUser>
 }
 
-export interface IUserSchema extends IUser, Document { }
+export interface ITokenSchema extends IToken, Document { }
 
-const UserSchema: Schema = new Schema({
+const TokenSchema: Schema = new Schema({
   name: {
     type: String,
     required: true,
@@ -27,9 +24,9 @@ const UserSchema: Schema = new Schema({
 }, { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } })
 
 
-UserSchema.virtual('password_confirmation')
+TokenSchema.virtual('password_confirmation')
 
-UserSchema.pre<IUserSchema>('save', async function (next) {
+TokenSchema.pre<ITokenSchema>('save', async function (next) {
   if (!this.isModified('password')) {
     return next()
   }
@@ -37,7 +34,7 @@ UserSchema.pre<IUserSchema>('save', async function (next) {
   this.password = await encryptingService.encrypt(this.password as string)
 })
 
-export const UserModel = model<IUserSchema>('User', UserSchema)
+export const TokenModel = model<ITokenSchema>('Token', TokenSchema)
 
 
 
