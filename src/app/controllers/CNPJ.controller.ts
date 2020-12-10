@@ -1,5 +1,4 @@
 import { IController, IHttpRequest, IHttpResponse } from '@/interfaces/http.interface'
-import { ILead } from '../models/lead.model'
 import { CNPJService, CNPJ_Service } from '@/services/CNPJ.service'
 
 export class CNPJ_Controller implements IController {
@@ -21,13 +20,13 @@ export class CNPJ_Controller implements IController {
 	}
 
 	public async read(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const CNPJNumber = httpRequest.params.cnpj
+		const CNPJNumber = httpRequest.body.cnpj
 		try {
-			const CNPJ = await CNPJService.findByNumber(CNPJNumber)
+			const company = await CNPJService.findByCNPJ(CNPJNumber)
 			return {
 				message: 'CNPJ found successfully',
 				statusCode: 200,
-				content: CNPJ
+				content: company
 			}
 		} catch (error) {
 			return {
@@ -39,15 +38,15 @@ export class CNPJ_Controller implements IController {
 	}
 
 	public async update(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const oldCNPJ = httpRequest.params.cnpj
-		const newCNPJ = httpRequest.body.cnpj
+		const oldCNPJ = httpRequest.body.oldCnpj
+		const newCNPJ = httpRequest.body.newCnpj
 
 		try {
-			const CNPJ = await CNPJService.updateByNumber(oldCNPJ, newCNPJ)
+			const company = await CNPJService.updateByCNPJ(oldCNPJ, newCNPJ)
 			return {
 				message: 'CNPJ updated successfully',
 				statusCode: 200,
-				content: CNPJ
+				content: company
 			}
 		} catch (error) {
 			return {
@@ -59,9 +58,9 @@ export class CNPJ_Controller implements IController {
 	}
 
 	public async delete(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const CNPJNumber = httpRequest.params.cnpj
+		const CNPJNumber = httpRequest.body.cnpj
 		try {
-			await CNPJService.deleteByNumber(CNPJNumber)
+			await CNPJService.deleteByCPNJ(CNPJNumber)
 
 			return {
 				message: 'CNPJ deleted successfully',

@@ -6,47 +6,47 @@ export class CNPJ_Service {
 	) { }
 
 	public async list(): Promise<ILeadSchema[]> {
-		const cnpjs = await this.leadModel.find().select('company.cnpj')
-		return cnpjs
+		const companies = await this.leadModel.find().select('company')
+		return companies
 	}
 
-	public async findByNumber(number: string): Promise<ILeadSchema> {
-		const cnpj = await this.leadModel.findOne({
-			'company.cnpj': number
+	public async findByCNPJ(cnpj: string): Promise<ILeadSchema> {
+		const company = await this.leadModel.findOne({
+			'company.cnpj': cnpj
 		}).select('company')
 
-		if (!cnpj) {
+		if (!company) {
 			throw new Error('CNPJ not found')
 		}
 
-		return cnpj
+		return company
 	}
 
-	public async updateByNumber(oldCNPJ: string, newCNPJ: string): Promise<ILeadSchema> {
+	public async updateByCNPJ(oldCNPJ: string, newCNPJ: string): Promise<ILeadSchema> {
 		await this.leadModel
 			.updateOne(
 				{ 'company.cnpj': oldCNPJ },
 				{'company.cnpj': newCNPJ}
 			)
 
-		const cnpj = this.findByNumber(newCNPJ)
+		const company = this.findByCNPJ(newCNPJ)
 
-		if (!cnpj) {
+		if (!company) {
 			throw new Error('Lead not found')
 		}
 
-		return cnpj
+		return company
 	}
 
-	public async deleteByNumber(number: string): Promise<ILeadSchema> {
+	public async deleteByCPNJ(cnpj: string): Promise<ILeadSchema> {
 
-		const cnpj = await this.leadModel.findOneAndDelete({ 'company.cnpj': number })
+		const company = await this.leadModel.findOneAndDelete({ 'company.cnpj': cnpj })
 
-		if (!cnpj) {
+		if (!company) {
 			throw new Error('Lead not found')
 		}
 
-		return cnpj
+		return company
 	}
 }
 

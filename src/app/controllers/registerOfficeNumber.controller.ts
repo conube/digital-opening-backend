@@ -1,48 +1,32 @@
-import { Document } from 'mongoose';
 import { IController, IHttpRequest, IHttpResponse } from '@/interfaces/http.interface'
-import { ILead } from '../models/lead.model'
-import { leadService, LeadService } from '../services/lead.service'
+import { registerOfficeNumberService, RegisterOfficeNumberService } from '../services/registerOfficeNumber.service'
 
 export class RegisterOfficeNumberController implements IController {
 	constructor(
-		private leadService: LeadService
+		private registerOfficeNumberService: RegisterOfficeNumberService
 	) { }
 
 	public async list(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const registerOfficeNumbers = await leadService.list()
+		const documents = await registerOfficeNumberService.list()
 		return {
 			message: 'RegisterOfficeNumbers found successfully',
 			statusCode: 200,
-			content: registerOfficeNumbers
+			content: documents
 		}
 	}
 
 	public async create(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const registerOfficeNumberDTO: ILead = httpRequest.body.document.registerOfficeNumber
-		try{
-			const registerOfficeNumber = await this.leadService.create(registerOfficeNumberDTO)
-			return {
-				message: 'RegisterOfficeNumber created successfully',
-				statusCode: 200,
-				content: registerOfficeNumber
-			}
-		} catch(err) {
-			return {
-				message: `${err}`,
-				statusCode: 500,
-				content: {}
-			}
-		}
+		return
 	}
 
 	public async read(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const registerOfficeNumberId = httpRequest.params.registerOfficeNumber_id
+		const register = httpRequest.body.register
 		try {
-			const registerOfficeNumber = await leadService.findById(registerOfficeNumberId)
+			const document = await registerOfficeNumberService.findByRegisterOfficeNumber(register)
 			return {
 				message: 'RegisterOfficeNumber found successfully',
 				statusCode: 200,
-				content: registerOfficeNumber
+				content: document
 			}
 		} catch (error) {
 			return {
@@ -54,15 +38,15 @@ export class RegisterOfficeNumberController implements IController {
 	}
 
 	public async update(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const registerOfficeNumberId = httpRequest.params.registerOfficeNumber_id
-		const registerOfficeNumberInfo = httpRequest.body
+		const oldRegister = httpRequest.body.oldRegister
+		const newRegister = httpRequest.body.newRegister
 
 		try {
-			const registerOfficeNumber = await leadService.updateById(registerOfficeNumberId, registerOfficeNumberInfo)
+			const document = await registerOfficeNumberService.updateByRegisterOfficeNumber(oldRegister, newRegister)
 			return {
 				message: 'RegisterOfficeNumber updated successfully',
 				statusCode: 200,
-				content: registerOfficeNumber
+				content: document
 			}
 		} catch (error) {
 			return {
@@ -74,9 +58,9 @@ export class RegisterOfficeNumberController implements IController {
 	}
 
 	public async delete(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const registerOfficeNumberId = httpRequest.params.registerOfficeNumber_id
+		const register = httpRequest.body.register
 		try {
-			await leadService.deleteById(registerOfficeNumberId)
+			await registerOfficeNumberService.deleteByRegisterOfficeNumber(register)
 
 			return {
 				message: 'RegisterOfficeNumber deleted successfully',
@@ -93,4 +77,4 @@ export class RegisterOfficeNumberController implements IController {
 	}
 }
 
-export const registerOfficeNumberController = new RegisterOfficeNumberController(leadService)
+export const registerOfficeNumberController = new RegisterOfficeNumberController(registerOfficeNumberService)

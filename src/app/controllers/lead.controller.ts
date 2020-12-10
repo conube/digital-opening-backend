@@ -30,7 +30,7 @@ export class LeadController implements IController {
 	public async create(httpRequest: IHttpRequest): Promise<IHttpResponse> {
 		const leadDTO: ILead = httpRequest.body
 		try{
-			const createdLead = await this.leadService.create(leadDTO)
+			const createdLead = await leadService.create(leadDTO)
 			const updatedLead = this.addPathToLeadMedia(createdLead, {}) 
 
 			const lead = await leadService.updateById(updatedLead['_id'], updatedLead)
