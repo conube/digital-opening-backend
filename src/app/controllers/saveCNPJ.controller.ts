@@ -1,14 +1,14 @@
 import { IController, IHttpRequest, IHttpResponse } from '@/interfaces/http.interface'
-import { IDigitalCertificate } from '../models/digitalCertificate.model'
-import { digitalCertificateService, DigitalCertificateService } from '@/services/digitalCertificate.service'
+import { ILead } from '../models/lead.model'
+import { leadService, LeadService } from '@/services/lead.service'
 
 export class DigitalCertificateController implements IController {
 	constructor(
-		private digitalCertificateService: DigitalCertificateService
+		private leadService: LeadService
 	) { }
 
 	public async list(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const digitalCertificates = await digitalCertificateService.list()
+		const digitalCertificates = await leadService.list()
 		return {
 			message: 'DigitalCertificates found successfully',
 			statusCode: 200,
@@ -17,9 +17,9 @@ export class DigitalCertificateController implements IController {
 	}
 
 	public async create(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const digitalCertificateDTO: IDigitalCertificate = httpRequest.body
+		const digitalCertificateDTO: ILead = httpRequest.body
 		try{
-			const digitalCertificate = await this.digitalCertificateService.create(digitalCertificateDTO)
+			const digitalCertificate = await this.leadService.create(digitalCertificateDTO)
 			return {
 				message: 'DigitalCertificate created successfully',
 				statusCode: 200,
@@ -37,7 +37,7 @@ export class DigitalCertificateController implements IController {
 	public async read(httpRequest: IHttpRequest): Promise<IHttpResponse> {
 		const digitalCertificateId = httpRequest.params.digitalCertificate_id
 		try {
-			const digitalCertificate = await digitalCertificateService.findById(digitalCertificateId)
+			const digitalCertificate = await leadService.findById(digitalCertificateId)
 			return {
 				message: 'DigitalCertificate found successfully',
 				statusCode: 200,
@@ -57,7 +57,7 @@ export class DigitalCertificateController implements IController {
 		const digitalCertificateInfo = httpRequest.body
 
 		try {
-			const digitalCertificate = await digitalCertificateService.updateById(digitalCertificateId, digitalCertificateInfo)
+			const digitalCertificate = await leadService.updateById(digitalCertificateId, digitalCertificateInfo)
 			return {
 				message: 'DigitalCertificate updated successfully',
 				statusCode: 200,
@@ -75,7 +75,7 @@ export class DigitalCertificateController implements IController {
 	public async delete(httpRequest: IHttpRequest): Promise<IHttpResponse> {
 		const digitalCertificateId = httpRequest.params.digitalCertificate_id
 		try {
-			await digitalCertificateService.deleteById(digitalCertificateId)
+			await leadService.deleteById(digitalCertificateId)
 
 			return {
 				message: 'DigitalCertificate deleted successfully',
@@ -92,4 +92,4 @@ export class DigitalCertificateController implements IController {
 	}
 }
 
-export const digitalCertificateController = new DigitalCertificateController(digitalCertificateService)
+export const digitalCertificateController = new DigitalCertificateController(leadService)

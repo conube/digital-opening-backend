@@ -8,9 +8,9 @@ export class DigitalCertificateRouter {
 	constructor() {
 		this._router.get('/registerOfficeNumbers', adapt(registerOfficeNumberController.list.bind(registerOfficeNumberController)))
 		this._router.post('/registerOfficeNumbers', adapt(registerOfficeNumberController.create.bind(registerOfficeNumberController)))
-		this._router.get('/registerOfficeNumbers/:registerOfficeNumber_id', adapt(registerOfficeNumberController.read.bind(registerOfficeNumberController)))
-		this._router.put('/registerOfficeNumbers/:registerOfficeNumber_id', adapt(registerOfficeNumberController.update.bind(registerOfficeNumberController)))
-		this._router.delete('/registerOfficeNumbers/:registerOfficeNumber_id', adapt(registerOfficeNumberController.delete.bind(registerOfficeNumberController)))
+		this._router.get('/registerOfficeNumbers/:registerOfficeNumber', adapt(registerOfficeNumberController.read.bind(registerOfficeNumberController)))
+		this._router.put('/registerOfficeNumbers/:registerOfficeNumber', adapt(registerOfficeNumberController.update.bind(registerOfficeNumberController)))
+		this._router.delete('/registerOfficeNumbers/:registerOfficeNumber', adapt(registerOfficeNumberController.delete.bind(registerOfficeNumberController)))
 	}
 }
 
