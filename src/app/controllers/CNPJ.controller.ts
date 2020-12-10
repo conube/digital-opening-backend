@@ -59,9 +59,9 @@ export class CNPJ_Controller implements IController {
 	}
 
 	public async delete(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const CNPJId = httpRequest.params.CNPJ_id
+		const CNPJNumber = httpRequest.params.cnpj
 		try {
-			await CNPJService.deleteByNumber(CNPJId)
+			await CNPJService.deleteByNumber(CNPJNumber)
 
 			return {
 				message: 'CNPJ deleted successfully',

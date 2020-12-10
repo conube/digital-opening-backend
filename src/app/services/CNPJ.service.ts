@@ -40,7 +40,7 @@ export class CNPJ_Service {
 
 	public async deleteByNumber(number: string): Promise<ILeadSchema> {
 
-		const cnpj = await this.leadModel.findOneAndDelete({ _id: number })
+		const cnpj = await this.leadModel.findOneAndDelete({ 'company.cnpj': number })
 
 		if (!cnpj) {
 			throw new Error('Lead not found')
