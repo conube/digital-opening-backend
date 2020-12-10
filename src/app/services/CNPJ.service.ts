@@ -6,50 +6,52 @@ export class CNPJ_Service {
 	) { }
 
 	public async list(): Promise<ILeadSchema[]> {
-		const leads = await this.leadModel.find()
-		return leads
+		const cnpjs = await this.leadModel.find().select('company.cnpj')
+		return cnpjs
 	}
 
 	public async create(leadDTO: ILead): Promise<ILeadSchema> {
-		const lead = await this.leadModel.create(leadDTO)
-		return lead
+		const cnpj = await this.leadModel.create(leadDTO)
+		return cnpj
 	}
 
-	public async findById(_id: string): Promise<ILeadSchema> {
-		const lead = await this.leadModel.findById({ _id })
+	public async findByNumber(number: string): Promise<ILeadSchema> {
+		const cnpj = await this.leadModel.findOne({
+			'company.cnpj': number
+		}).select('company')
 
-		if (!lead) {
-			throw new Error('Lead not found')
+		if (!cnpj) {
+			throw new Error('CNPJ not found')
 		}
 
-		return lead
+		return cnpj
 	}
 
-	public async updateById(_id: string, leadDTO: ILead): Promise<ILeadSchema> {
+	public async updateByNumber(number: string, leadDTO: ILead): Promise<ILeadSchema> {
 		await this.leadModel
 			.updateOne(
-				{ _id },
+				{ _id: number },
 				leadDTO
 			)
 
-		const lead = this.findById(_id)
+		const cnpj = this.findByNumber(number)
 
-		if (!lead) {
+		if (!cnpj) {
 			throw new Error('Lead not found')
 		}
 
-		return lead
+		return cnpj
 	}
 
-	public async deleteById(_id: string): Promise<ILeadSchema> {
+	public async deleteByNumber(number: string): Promise<ILeadSchema> {
 
-		const lead = await this.leadModel.findOneAndDelete({ _id })
+		const cnpj = await this.leadModel.findOneAndDelete({ _id: number })
 
-		if (!lead) {
+		if (!cnpj) {
 			throw new Error('Lead not found')
 		}
 
-		return lead
+		return cnpj
 	}
 }
 

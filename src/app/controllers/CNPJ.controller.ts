@@ -1,14 +1,14 @@
 import { IController, IHttpRequest, IHttpResponse } from '@/interfaces/http.interface'
 import { ILead } from '../models/lead.model'
-import { leadService, LeadService } from '@/services/lead.service'
+import { CNPJService, CNPJ_Service } from '@/services/CNPJ.service'
 
 export class CNPJ_Controller implements IController {
 	constructor(
-		private leadService: LeadService
+		private CNPJService: CNPJ_Service
 	) { }
 
 	public async list(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const CNPJs = await leadService.list()
+		const CNPJs = await CNPJService.list()
 		return {
 			message: 'CNPJs found successfully',
 			statusCode: 200,
@@ -19,7 +19,7 @@ export class CNPJ_Controller implements IController {
 	public async create(httpRequest: IHttpRequest): Promise<IHttpResponse> {
 		const CNPJDTO: ILead = httpRequest.body
 		try{
-			const CNPJ = await this.leadService.create(CNPJDTO)
+			const CNPJ = await this.CNPJService.create(CNPJDTO)
 			return {
 				message: 'CNPJ created successfully',
 				statusCode: 200,
@@ -35,9 +35,9 @@ export class CNPJ_Controller implements IController {
 	}
 
 	public async read(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const CNPJId = httpRequest.params.CNPJ_id
+		const CNPJNumber = httpRequest.params.cnpj
 		try {
-			const CNPJ = await leadService.findById(CNPJId)
+			const CNPJ = await CNPJService.findByNumber(CNPJNumber)
 			return {
 				message: 'CNPJ found successfully',
 				statusCode: 200,
@@ -57,7 +57,7 @@ export class CNPJ_Controller implements IController {
 		const CNPJInfo = httpRequest.body
 
 		try {
-			const CNPJ = await leadService.updateById(CNPJId, CNPJInfo)
+			const CNPJ = await CNPJService.updateByNumber(CNPJId, CNPJInfo)
 			return {
 				message: 'CNPJ updated successfully',
 				statusCode: 200,
@@ -75,7 +75,7 @@ export class CNPJ_Controller implements IController {
 	public async delete(httpRequest: IHttpRequest): Promise<IHttpResponse> {
 		const CNPJId = httpRequest.params.CNPJ_id
 		try {
-			await leadService.deleteById(CNPJId)
+			await CNPJService.deleteByNumber(CNPJId)
 
 			return {
 				message: 'CNPJ deleted successfully',
@@ -92,4 +92,4 @@ export class CNPJ_Controller implements IController {
 	}
 }
 
-export const CNPJController = new CNPJ_Controller(leadService)
+export const CNPJController = new CNPJ_Controller(CNPJService)
