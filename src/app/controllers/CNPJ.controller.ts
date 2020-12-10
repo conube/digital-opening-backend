@@ -17,21 +17,7 @@ export class CNPJ_Controller implements IController {
 	}
 
 	public async create(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const CNPJDTO: ILead = httpRequest.body
-		try{
-			const CNPJ = await this.CNPJService.create(CNPJDTO)
-			return {
-				message: 'CNPJ created successfully',
-				statusCode: 200,
-				content: CNPJ
-			}
-		} catch(err) {
-			return {
-				message: `${err}`,
-				statusCode: 500,
-				content: {}
-			}
-		}
+		return 
 	}
 
 	public async read(httpRequest: IHttpRequest): Promise<IHttpResponse> {
@@ -53,11 +39,11 @@ export class CNPJ_Controller implements IController {
 	}
 
 	public async update(httpRequest: IHttpRequest): Promise<IHttpResponse> {
-		const CNPJId = httpRequest.params.CNPJ_id
-		const CNPJInfo = httpRequest.body
+		const oldCNPJ = httpRequest.params.cnpj
+		const newCNPJ = httpRequest.body.cnpj
 
 		try {
-			const CNPJ = await CNPJService.updateByNumber(CNPJId, CNPJInfo)
+			const CNPJ = await CNPJService.updateByNumber(oldCNPJ, newCNPJ)
 			return {
 				message: 'CNPJ updated successfully',
 				statusCode: 200,

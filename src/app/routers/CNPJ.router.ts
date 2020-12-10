@@ -7,7 +7,6 @@ export class CNPJ_Router {
 
 	constructor() {
 		this._router.get('/cnpj', adapt(CNPJController.list.bind(CNPJController)))
-		this._router.post('/cnpj', adapt(CNPJController.create.bind(CNPJController)))
 		this._router.get('/cnpj/:cnpj', adapt(CNPJController.read.bind(CNPJController)))
 		this._router.put('/cnpj/:cnpj', adapt(CNPJController.update.bind(CNPJController)))
 		this._router.delete('/cnpj/:cnpj', adapt(CNPJController.delete.bind(CNPJController)))

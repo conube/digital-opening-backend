@@ -10,11 +10,6 @@ export class CNPJ_Service {
 		return cnpjs
 	}
 
-	public async create(leadDTO: ILead): Promise<ILeadSchema> {
-		const cnpj = await this.leadModel.create(leadDTO)
-		return cnpj
-	}
-
 	public async findByNumber(number: string): Promise<ILeadSchema> {
 		const cnpj = await this.leadModel.findOne({
 			'company.cnpj': number
@@ -27,14 +22,14 @@ export class CNPJ_Service {
 		return cnpj
 	}
 
-	public async updateByNumber(number: string, leadDTO: ILead): Promise<ILeadSchema> {
+	public async updateByNumber(oldCNPJ: string, newCNPJ: string): Promise<ILeadSchema> {
 		await this.leadModel
 			.updateOne(
-				{ _id: number },
-				leadDTO
+				{ 'company.cnpj': oldCNPJ },
+				{'company.cnpj': newCNPJ}
 			)
 
-		const cnpj = this.findByNumber(number)
+		const cnpj = this.findByNumber(newCNPJ)
 
 		if (!cnpj) {
 			throw new Error('Lead not found')
