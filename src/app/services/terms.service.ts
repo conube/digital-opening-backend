@@ -16,7 +16,6 @@ export class TermsService {
 		if (!terms) {
 			throw new Error('Terms not found')
 		}
-
 		return terms
 	}
 
