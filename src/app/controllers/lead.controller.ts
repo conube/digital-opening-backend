@@ -16,24 +16,10 @@ export class LeadController implements IController {
 		}
 	}
 	
-	// mounts the path using the id and the original_name
-	private addPathToLeadMedia(lead: ILead, leadFromApi: Object): ILead {
-		const doc = leadFromApi ? leadFromApi['document'] : lead['document']
-		const mediaFront = doc['media_front']
-		const mediaBack = doc['media_back']
-
-		lead['document']['media_front'].path = mediaFront.original_name + lead['document']['media_front']._id
-		lead['document']['media_back'].path = mediaBack.original_name + lead['document']['media_back']._id
-		return lead
-	}
-
 	public async create(httpRequest: IHttpRequest): Promise<IHttpResponse> {
 		const leadDTO: ILead = httpRequest.body
 		try{
-			const createdLead = await leadService.create(leadDTO)
-			const updatedLead = this.addPathToLeadMedia(createdLead, {}) 
-
-			const lead = await leadService.updateById(updatedLead['_id'], updatedLead)
+			const lead = await this.leadService.create(leadDTO)
 
 			return {
 				message: 'Lead created successfully',
@@ -72,10 +58,8 @@ export class LeadController implements IController {
 		const leadInfo = httpRequest.body
 
 		try {
-			const foundLead = await leadService.findById(leadId)
-			const updatedLead = this.addPathToLeadMedia(foundLead, leadInfo) 
 			
-			const lead = await leadService.updateById(leadId, updatedLead)
+			const lead = await leadService.updateById(leadId, leadInfo)
 			return {
 				message: 'Lead updated successfully',
 				statusCode: 200,

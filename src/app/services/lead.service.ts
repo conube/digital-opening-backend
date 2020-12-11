@@ -12,6 +12,18 @@ export class LeadService {
 
 	public async create(leadDTO: ILead): Promise<ILeadSchema> {
 		const lead = await this.leadModel.create(leadDTO)
+			.then(newLead => {
+				if (newLead.document['media_front'].original_name){
+					newLead.document['media_front'].path = newLead.document['media_front'].original_name + newLead.document['media_front']._id
+				}
+
+				if (newLead.document['media_back'].original_name){
+					newLead.document['media_back'].path = newLead.document['media_back'].original_name + newLead.document['media_back']._id
+				}
+
+				return this.updateById(newLead._id, newLead)
+			})
+			
 		return lead
 	}
 
@@ -25,12 +37,16 @@ export class LeadService {
 		return lead
 	}
 
-	public async updateById(_id: string, leadDTO: ILead): Promise<ILeadSchema> {
-		await this.leadModel
-			.updateOne(
-				{ _id },
-				leadDTO
-			)
+	public async updateById(_id: string, updatedLead: ILead): Promise<ILeadSchema> {
+		if (updatedLead.document['media_front'].original_name) {
+			updatedLead.document['media_front'].path = updatedLead.document['media_front'].original_name + updatedLead.document['media_front']._id
+		}
+
+		if (updatedLead.document['media_back'].original_name) {
+			updatedLead.document['media_back'].path = updatedLead.document['media_back'].original_name + updatedLead.document['media_back']._id
+		}
+
+		await this.leadModel.updateOne({ _id },updatedLead)
 
 		const lead = this.findById(_id)
 
